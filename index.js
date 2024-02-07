@@ -1,36 +1,59 @@
 const inquirer = require('inquirer');
 
-function init() {
+const { table } = require('table');
 
-inquirer
-  .prompt([
-    /* Pass your questions in here */
-    {
+const mysql = require('mysql2/promise'); 
+
+async function init() {
+  try {
+    const db = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'password123',
+      database: 'employer_db'
+    });
+
+    const answers = await inquirer.prompt([
+      {
         type: 'list',
-        name: 'mainOptions',
+        name: 'options',
         message: 'What would you like to do?',
         choices: [
-            'View All Departments',
-            'View All Roles',
-            'View All Employees',
-            'Add Department',
-            'Add Role',
-            'Add Employee',
-            'Update Employee Role'
+          'View All Departments',
+          'View All Roles',
+          'View All Employees',
+          'Add Department',
+          'Add Role',
+          'Add Employee',
+          'Update Employee Role'
         ]
+      }
+    ]);
+
+    // console.log(answers);
+
+    if (answers.options === 'View All Departments') {
+      const departments = await db.query('SELECT * FROM department;');
+      for (i = 0; i < departments.length; i++) {
+        const arrOfDeps = departments[i].map( row => Object.values(row));
+        arrOfDeps.unshift(["id", "name"]);
+        console.log(table(arrOfDeps));
+      }
     }
-  ])
-  .then((answers) => {
-    // Use user feedback for... whatever!!
-    console.log(answers);
-  })
-  .catch((error) => {
+
+    if (answers.options === 'View All Roles') {
+      const roles = await db.query('')
+    }
+
+  } 
+  
+  catch (error) {
     if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
+      // Handle TTY error
     } else {
-      // Something else went wrong
+      // Handle other errors
     }
-  });
-};
+  }
+}
 
 init();
