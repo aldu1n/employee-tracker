@@ -1,3 +1,4 @@
+/* Inserts values into tables that were created by schema.sql.*/
 INSERT INTO department (name)
 VALUES 
 ("Engineering"),

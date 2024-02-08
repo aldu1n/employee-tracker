@@ -1,13 +1,16 @@
+// Imports inquirer, mysql and table plugins.
 const inquirer = require('inquirer');
 const { table } = require('table');
 const mysql = require('mysql2/promise');
 
+// Sanitize function to prevent MySQL injections, which could drop db, or get access to private data.
 const sanitizeInput = (str) => {
   return str.replace(/['";=]/g, "");
 };
 
 async function init() {
   try {
+    // MySQL connection to the database is created.
     const db = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
@@ -15,6 +18,7 @@ async function init() {
       database: 'employer_db'
     });
 
+    // Inquire function, which runs first prompts.
     const inquire = () => {
       inquirer
         .prompt([
@@ -34,6 +38,7 @@ async function init() {
           }
         ])
         .then(async (answers) => {
+          // Switch/case statements which run different MySQL queries, based on the user's selection in prompt.
           switch (answers.options) {
             case 'View All Departments':
               try {

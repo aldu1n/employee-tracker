@@ -1,3 +1,5 @@
+/* Creates employer_db and 3 tables, then each column is given data type. */
+
 DROP DATABASE IF EXISTS employer_db;
 
 CREATE DATABASE employer_db;
