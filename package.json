@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "ascii-table": "^0.0.9",
+    "asciitable": "^0.0.7",
+    "cli-table": "^0.3.11",
     "inquirer": "^8.2.4",
     "mysql2": "^3.9.1",
     "table": "^6.8.1"
