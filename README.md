@@ -21,7 +21,7 @@ None.
 
 ## Usage
 
-Simply open the terminal and enter 'node index'. (Don't forget to install plugins before using by typing 'npm i' into the terminal).
+Simply open the terminal and enter 'node index'. (Don't forget to install plugins before using by typing 'npm i' into the terminal).\
 [Link to the instructional video](https://drive.google.com/file/d/11Qx4Y6T5dtXCbDbDwP73nedlxF9fMXRq/view)
 
 ## License
